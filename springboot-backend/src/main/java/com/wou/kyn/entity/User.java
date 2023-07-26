@@ -45,6 +45,8 @@ public class User extends DateAudit {
 	private String password;
 
 	private String name;
+	
+	private String imgUrl;
 
 	@Size(max = 20, message = "Provider must not exceed 20 characters")
 	@Column(nullable = false, unique = true)
@@ -126,6 +128,14 @@ public class User extends DateAudit {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public String getProvider() {
