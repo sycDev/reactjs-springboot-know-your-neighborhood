@@ -48,8 +48,9 @@ public class User extends DateAudit {
 	
 	private String imgUrl;
 
+	@NotBlank(message = "Provider is required")
 	@Size(max = 20, message = "Provider must not exceed 20 characters")
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String provider;
 
 	@Column(name = "provider_id")

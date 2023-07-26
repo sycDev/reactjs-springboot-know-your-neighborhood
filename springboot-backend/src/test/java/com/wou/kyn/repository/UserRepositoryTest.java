@@ -44,13 +44,14 @@ public class UserRepositoryTest {
 
 		// Create User account
 		User user = new User(username, email, encodedPassword);
-		
+		user.setProvider("LOCAL");
+
 		// Save User account to database
 		User userToCreate = userRepository.save(user);
-		
+
 		// Retrieve the User account from database
 		User userSaved = userRepository.findByEmail(email).get();
-		
+
 		// Verify that the User account is successfully saved
 		assertThat(userToCreate.getEmail()).isEqualTo(userSaved.getEmail());
 	}
@@ -59,7 +60,7 @@ public class UserRepositoryTest {
 	public void testRoleAssignToUser() {
 		// Retrieve the User account from database
 		User user = userRepository.findByEmail("user@example.com").get();
-		
+
 		// Retrieve USER role from database
 		Set<Role> roles = new HashSet<>();
 		Role userRole = roleRepository.findByRoleName("USER").get();

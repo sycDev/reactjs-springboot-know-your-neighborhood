@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.wou.kyn.entity.Store;
 
 @DataJpaTest
-@Rollback(false)
+@Rollback(true)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @EnableJpaAuditing
 @RunWith(SpringJUnit4ClassRunner.class)
