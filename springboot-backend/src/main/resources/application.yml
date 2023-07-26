@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_kyn
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1030084516242-hbvajujbpmuq2cojjj2nopqd4len24h3.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+app:
+  jwt:
+    secret: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4OTE3MDA3MSwiaWF0IjoxNjg5MTcwMDcxfQeM0al2
+    expired_in_ms: 86400000
+  oauth2:
+      redirectUri: http://localhost:3000/oauth2/redirect
+  webhook:
+    slack: https://hooks.slack.com/services/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
+  cors:
+    allowedOrigins: http://localhost:3000
