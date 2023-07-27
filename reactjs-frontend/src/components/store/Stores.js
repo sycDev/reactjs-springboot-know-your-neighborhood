@@ -4,13 +4,30 @@ import { SearchOutlined } from '@ant-design/icons';
 import Title from 'antd/es/typography/Title';
 import TabTitle from '../common/TabTitle';
 import StoreCard from './StoreCard';
-import { deleteSingleStore, getAllStores } from './storeService';
+import StoreForm from './StoreForm';
+import { createStore, deleteSingleStore, getAllStores, updateStore } from './storeService';
 import NoDataImg from '../../assets/images/no-data.svg';
 import './Stores.css';
 
 function Stores() {
     const [isLoading, setIsLoading] = useState(false);
     const [stores, setStores] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [editStoreData, setEditStoreData] = useState(null);
+
+    const handleAddStore = () => {
+        setShowForm(true);
+        setEditStoreData(null);
+    };
+
+    const handleEditStore = (store) => {
+        setShowForm(true);
+        setEditStoreData(store);
+    };
+
+    const handleCloseModal = () => {
+        setShowForm(false);
+    };
 
     const fetchAllStores = async () => {
         try {
@@ -27,6 +44,46 @@ function Stores() {
             });
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleFormSubmit = async (formData) => {
+        if (editStoreData) {
+            // Editing an existing store
+            await updateStore(editStoreData.storeId, formData)
+                .then(() => {
+                    fetchAllStores();
+                    notification.success({
+                        message: 'Success',
+                        description: 'Store successfully updated',
+                        placement: 'bottomLeft'
+                    });
+                })
+                .catch(error => {
+                    notification.error({
+                        message: 'Error',
+                        description: error.message || 'Something went wrong.',
+                        placement: 'bottomLeft'
+                    });
+                });
+        } else {
+            // Adding a new store
+            await createStore(formData)
+                .then(() => {
+                    fetchAllStores();
+                    notification.success({
+                        message: 'Success',
+                        description: 'Store successfully added',
+                        placement: 'bottomLeft'
+                    });
+                })
+                .catch(error => {
+                    notification.error({
+                        message: 'Error',
+                        description: error.message || 'Something went wrong.',
+                        placement: 'bottomLeft'
+                    });
+                });
         }
     };
 
@@ -61,6 +118,7 @@ function Stores() {
         fetchAllStores();
     }, []);
 
+    // For skeleton while loading the store list
     let cardIdCounter = 1;
     const skeletonCards = new Array(4).fill().map(() => {
         const cardId = cardIdCounter++;
@@ -75,21 +133,24 @@ function Stores() {
             </Col>
         );
     });
-    
+
     let content;
     if (isLoading) {
+        // Loading
         content = <Row gutter={[16, 16]}>{skeletonCards}</Row>;
     } else if (stores.length > 0) {
+        // Store records found
         content = (
             <Row gutter={[16, 16]}>
                 {stores.map((store) => (
                     <Col key={store.storeId} xs={24} sm={12} md={8} lg={6}>
-                        <StoreCard store={store} onDelete={handleDelete} />
+                        <StoreCard store={store} onEdit={handleEditStore} onDelete={handleDelete} />
                     </Col>
                 ))}
             </Row>
         );
     } else {
+        // Empty store record
         content = (
             <Empty
                 className="emptyResult"
@@ -111,12 +172,21 @@ function Stores() {
                     <Button icon={<SearchOutlined />} href="/stores/search">
                         Search
                     </Button>
-                    <Button type="primary" href="/stores/new">
+                    <Button type="primary" onClick={handleAddStore}>
                         Add Store
                     </Button>
                 </Space>
                 {content}
             </div>
+
+            {showForm && (
+                // For showing the add and edit modal form 
+                <StoreForm
+                    editStoreData={editStoreData}
+                    onCancel={handleCloseModal}
+                    onSubmit={handleFormSubmit}
+                />
+            )}
         </>
     );
 }

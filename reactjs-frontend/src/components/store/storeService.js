@@ -13,9 +13,37 @@ export const getAllStores = async () => {
     return response.data;
 };
 
+// [POST] Create a new store
+export const createStore = async (request) => {
+    const response = await axios.post(API_URL, {
+        storeName: request.storeName,
+        contactNumber: request.contactNumber,
+        openingHours: request.openingHours,
+        address: request.address
+    }, {
+        headers: authHeader()
+    });
+
+    return response.data;
+};
+
+// [PUT] Update an existing store
+export const updateStore = async (storeId, request) => {
+    const response = await axios.put(API_URL + "/update/" + storeId, {
+        storeName: request.storeName,
+        contactNumber: request.contactNumber,
+        openingHours: request.openingHours,
+        address: request.address
+    }, {
+        headers: authHeader()
+    });
+
+    return response.data;
+};
+
 // [DELETE] Delete an existing store
-export const deleteSingleStore = async (request) => {
-    const response = await axios.delete(API_URL + "/delete/" + request, {
+export const deleteSingleStore = async (storeId) => {
+    const response = await axios.delete(API_URL + "/delete/" + storeId, {
         headers: authHeader()
     });
 

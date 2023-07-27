@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Card, Modal } from 'antd';
 import {
     PhoneOutlined,
@@ -10,18 +9,20 @@ import {
 } from '@ant-design/icons';
 import './StoreCard.css';
 
-function StoreCard(props) {
-    const { store } = props;
+function StoreCard({ store, onEdit, onDelete }) {
+    const handleEdit = () => {
+        onEdit(store);
+    };
 
-    const handleDelete = async () => {
-        // Show the confirmation modal
+    const handleDelete = () => {
+        // Show the delete confirmation modal
         Modal.confirm({
             title: 'Confirm Delete',
             content: 'Are you sure you want to delete this store?',
             okText: 'Yes',
             cancelText: 'No',
             onOk: () => {
-                props.onDelete(store.storeId);
+                onDelete(store.storeId);
             }
         });
     };
@@ -32,9 +33,7 @@ function StoreCard(props) {
                 title={`${store.storeName}`}
                 className="store-card"
                 actions={[
-                    <Link to={`/stores/edit/${store.storeId}`} key="edit-link">
-                        <EditOutlined key="edit" />
-                    </Link>,
+                    <EditOutlined key="edit" onClick={handleEdit} />,
                     <DeleteOutlined key="delete" onClick={handleDelete} />
                 ]}
             >
