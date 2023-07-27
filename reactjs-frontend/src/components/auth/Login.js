@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Divider, Form, Input } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Divider, Form, Input, notification } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import TabTitle from '../common/TabTitle';
@@ -12,6 +12,28 @@ function Login() {
     const handleFinish = (values) => {
         console.log(values);
     }
+
+    useEffect(() => {
+        // Function to extract query parameters from the URL
+        const getUrlParameter = (name) => {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            return urlSearchParams.get(name);
+        };
+
+        // Show alert error message if error parameter is present
+        const error = getUrlParameter('error');
+        if (error) {
+            setTimeout(() => {
+                notification.error({
+                    message: 'Oops',
+                    description: error,
+                    placement: 'bottomLeft'
+                });
+                // Remove the error query parameter from the url
+                window.history.replaceState(null, '', '/login');
+            }, 100);
+        }
+    })
 
     return (
         <div style={{ textAlign: 'center', width: '100%' }}>

@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import './Nav.css';
 import { Header } from 'antd/es/layout/layout';
 
-const items = [
+const guestItems = [
     {
         key: "/",
         label: <Link to='/'>Home</Link>
@@ -27,13 +27,51 @@ const items = [
     }
 ];
 
-function Nav() {
+function Nav(props) {
     const [current, setCurrent] = useState('');
 
     const location = useLocation();
     useEffect(() => {
         setCurrent(location.pathname);
     }, [location]);
+
+    const securedItems = [
+        {
+            key: "/",
+            label: <Link to='/'>Home</Link>
+        },
+        {
+            key: "/about",
+            label: <Link to='/about'>About Us</Link>
+        },
+        {
+            key: "/contact",
+            label: <Link to='/contact'>Contact Us</Link>
+        },
+        {
+            key: "/stores",
+            label: <Link to='/stores'>Stores</Link>
+        },
+        {
+            key: "/profile",
+            label: props.currentUser ? (
+                    <Link to='/profile'>
+                        <b>{props.currentUser.name || props.currentUser.username}</b>
+                    </Link>
+                ) : null,
+        },
+        {
+            key: "/logout",
+            label: "Logout",
+            style: { color: 'red' }
+        },
+    ];
+
+    const handleMenuClick = ({ key }) => {
+        if (key === "/logout") {
+            props.onLogout();
+        }
+    };
 
     return (
         <Header 
@@ -53,8 +91,9 @@ function Nav() {
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={['/']}
-                items={items}
+                items={props.currentUser ? securedItems : guestItems}
                 selectedKeys={[current]}
+                onClick={handleMenuClick}
                 style={{ minWidth: 0, flex: 'auto' }}
             />
         </Header>
