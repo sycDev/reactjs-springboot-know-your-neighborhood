@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Form, Input, Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Button, Checkbox, Form, Input, Modal, notification } from 'antd';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import Title from 'antd/es/typography/Title';
 import {
@@ -12,9 +13,12 @@ import {
 import TabTitle from '../common/TabTitle';
 import Terms from '../pages/Terms';
 import './Register.css';
+import { checkEmailExistence, checkUsernameExistence } from '../user/userService';
+import { register } from './authService';
 
 function Register() {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     const preventInputSpacing = (e) => {
         if (e.key === ' ') {
@@ -29,6 +33,32 @@ function Register() {
         return Promise.resolve();
     };
 
+    const checkUsername = async (_, value) => {
+        try {
+            const response = await checkUsernameExistence(value);
+            if (response) {
+                return Promise.reject(new Error('Username already taken'));
+            }
+            
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(new Error('Error checking username existence'));
+        }
+    };
+
+    const checkEmail = async (_, value) => {
+        try {
+            const response = await checkEmailExistence(value);
+            if (response) {
+                return Promise.reject(new Error('Email already exists'));
+            }
+
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(new Error('Error checking email existence'));
+        }
+    };
+
     const showTermsModal = () => {
         setOpen(true);
     };
@@ -37,8 +67,42 @@ function Register() {
         setOpen(false);
     };
 
-    const handleFinish = (values) => {
-        console.log(values);
+    const handleFinish = async (values) => {
+        const request = {
+			username: values.username,
+			email: values.email,
+			password: values.password
+		};
+
+        try {
+            // Process register user
+            await register(request);
+            navigate('/login');
+            notification.success({
+                message: 'Success',
+                description: (
+                    <>
+                        You're successfully registered.<br />You may login now.
+                    </>
+                ),
+                placement: 'bottomLeft'
+            });
+        } catch (error) {
+            // Handle register user error
+            if (error.response.status === 400) {
+                notification.error({
+                    message: error.response.data.message,
+                    description: 'Please try again!',
+                    placement: 'bottomLeft'
+                });
+            } else {
+                notification.error({
+                    message: 'Error',
+                    description: error.message || 'Something went wrong.',
+                    placement: 'bottomLeft'
+                });
+            }
+        }
     };
 
     return (
@@ -63,7 +127,8 @@ function Register() {
                         {
                             max: USERNAME_MAX_LENGTH,
                             message: `Cannot exceed ${USERNAME_MAX_LENGTH} characters`
-                        }
+                        },
+                        { validator: checkUsername }
                     ]}
                     hasFeedback
                 >
@@ -87,7 +152,8 @@ function Register() {
                         {
                             max: EMAIL_MAX_LENGTH,
                             message: `Cannot exceed ${EMAIL_MAX_LENGTH} characters`
-                        }
+                        },
+                        { validator: checkEmail }
                     ]}
                     hasFeedback
                 >

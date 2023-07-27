@@ -17,3 +17,15 @@ export const login = async (request) => {
 
     return response.data;
 };
+
+// [POST] Register user with username, email and password
+export const register = async (request) => {
+    const response = await axios
+        .post(API_URL + "/register", {
+            username: request.username,
+            email: request.email,
+            password: request.password
+        });
+
+    return response.data;
+};

@@ -3,11 +3,11 @@ import { Button, Divider, Form, Input, notification } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import TabTitle from '../common/TabTitle';
-import './Login.css';
 import SocialLogin from './SocialLogin';
 import { GOOGLE_AUTH_URL } from "../utils/constant";
 import GoogleImg from '../../assets/images/google.png';
 import { login } from './authService';
+import './Login.css';
 
 function Login(props) {
     const handleFinish = async (values) => {

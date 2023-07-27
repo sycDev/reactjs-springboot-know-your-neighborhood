@@ -6,14 +6,14 @@ const API_URL = API_BASE_URL + "/users";
 
 // [GET] Check existence of username
 export const checkUsernameExistence = async (request) => {
-    const response = await axios.get("/users/checkUsernameExistence?username=" + request);
+    const response = await axios.get(API_URL + "/checkUsernameExistence?username=" + request);
 
     return response.data;
 };
 
 // [GET] Check existence of email
 export const checkEmailExistence = async (request) => {
-    const response = await axios.get("/users/checkEmailExistence?email=" + request);
+    const response = await axios.get(API_URL + "/checkEmailExistence?email=" + request);
 
     return response.data;
 };
