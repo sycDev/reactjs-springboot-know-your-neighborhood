@@ -37,7 +37,7 @@ function AppRouter(props) {
                 path="/profile"
                 element={
                     <PrivateRoute authenticated={props.isAuthenticated}>
-                        <Profile />
+                        <Profile currentUser={props.currentUser} />
                     </PrivateRoute>
                 }
             />

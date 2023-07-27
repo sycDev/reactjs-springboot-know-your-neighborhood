@@ -95,7 +95,8 @@ function App() {
 			/>
 			<Content>
 				<AppRouter 
-					isAuthenticated={isAuthenticated} 
+					isAuthenticated={isAuthenticated}
+					currentUser={currentUser}
 					onLogin={handleLogin}
 				/>
 			</Content>

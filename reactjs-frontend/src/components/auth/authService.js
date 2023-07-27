@@ -16,4 +16,4 @@ export const login = async (request) => {
     }
 
     return response.data;
-}
+};

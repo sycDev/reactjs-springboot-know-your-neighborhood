@@ -9,14 +9,14 @@ export const checkUsernameExistence = async (request) => {
     const response = await axios.get("/users/checkUsernameExistence?username=" + request);
 
     return response.data;
-}
+};
 
 // [GET] Check existence of email
 export const checkEmailExistence = async (request) => {
     const response = await axios.get("/users/checkEmailExistence?email=" + request);
 
     return response.data;
-}
+};
 
 // [GET] Retrieve current user information
 export const getCurrentUser = async () => {
@@ -25,4 +25,13 @@ export const getCurrentUser = async () => {
     });
 
     return response.data;
-}
+};
+
+// [GET] Retreive single user profile by id
+export const getProfileById = async (request) => {
+    const response = await axios.get(API_URL + "/" + request, {
+        headers: authHeader()
+    });
+
+    return response.data;
+};
