@@ -9,7 +9,7 @@ import GoogleImg from '../../assets/images/google.png';
 import { login } from './authService';
 import './Login.css';
 
-function Login(props) {
+function Login({ onLogin }) {
     const handleFinish = async (values) => {
         const request = {
             emailOrUsername: values.username,
@@ -19,7 +19,7 @@ function Login(props) {
         try {
             // Process login
             await login(request);
-            props.onLogin();
+            onLogin();
         } catch (error) {
             // Handle login error
             if (error.response.status === 401) {

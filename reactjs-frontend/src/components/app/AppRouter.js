@@ -12,7 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import Stores from '../store/Stores';
 import Profile from '../user/Profile';
 
-function AppRouter(props) {
+function AppRouter({ onLogin, isAuthenticated, currentUser }) {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
@@ -22,13 +22,13 @@ function AppRouter(props) {
             <Route path="/register" element={<Register />} />
             <Route 
                 path="/login" 
-                element={<Login onLogin={props.onLogin} />} 
+                element={<Login onLogin={onLogin} />} 
             />
             <Route path='/oauth2/redirect' element={<RedirectOAuth />} />
             <Route
                 path="/stores"
                 element={
-                    <PrivateRoute authenticated={props.isAuthenticated}>
+                    <PrivateRoute authenticated={isAuthenticated}>
                         <Stores />
                     </PrivateRoute>
                 }
@@ -36,8 +36,8 @@ function AppRouter(props) {
             <Route
                 path="/profile"
                 element={
-                    <PrivateRoute authenticated={props.isAuthenticated}>
-                        <Profile currentUser={props.currentUser} />
+                    <PrivateRoute authenticated={isAuthenticated}>
+                        <Profile currentUser={currentUser} />
                     </PrivateRoute>
                 }
             />

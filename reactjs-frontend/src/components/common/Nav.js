@@ -27,7 +27,7 @@ const guestItems = [
     }
 ];
 
-function Nav(props) {
+function Nav({ currentUser, onLogout }) {
     const [current, setCurrent] = useState('');
 
     const location = useLocation();
@@ -54,9 +54,9 @@ function Nav(props) {
         },
         {
             key: "/profile",
-            label: props.currentUser ? (
+            label: currentUser ? (
                     <Link to='/profile'>
-                        <b>{props.currentUser.name || props.currentUser.username}</b>
+                        <b>{currentUser.name || currentUser.username}</b>
                     </Link>
                 ) : null,
         },
@@ -69,7 +69,7 @@ function Nav(props) {
 
     const handleMenuClick = ({ key }) => {
         if (key === "/logout") {
-            props.onLogout();
+            onLogout();
         }
     };
 
@@ -91,7 +91,7 @@ function Nav(props) {
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={['/']}
-                items={props.currentUser ? securedItems : guestItems}
+                items={currentUser ? securedItems : guestItems}
                 selectedKeys={[current]}
                 onClick={handleMenuClick}
                 style={{ minWidth: 0, flex: 'auto' }}

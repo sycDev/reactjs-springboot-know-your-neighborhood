@@ -1,0 +1,15 @@
+.stores-container {
+    margin: 0 50px 50px 50px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    text-align: center;
+}
+
+.action-btn {
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
