@@ -47,7 +47,7 @@ function App() {
 		}
 
 		fetchCurrentUser();
-	}, []);
+	}, [isAuthenticated]);
 
 	const handleLogout = () => {
 		localStorage.removeItem(ACCESS_TOKEN);
@@ -62,6 +62,7 @@ function App() {
 	};
 
 	const handleLogin = () => {
+		setIsAuthenticated(true);
 		navigate('/stores');
 		notification.success({
 			message: 'Success',
