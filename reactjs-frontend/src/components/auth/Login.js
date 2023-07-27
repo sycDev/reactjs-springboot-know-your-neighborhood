@@ -7,10 +7,35 @@ import './Login.css';
 import SocialLogin from './SocialLogin';
 import { GOOGLE_AUTH_URL } from "../utils/constant";
 import GoogleImg from '../../assets/images/google.png';
+import { login } from './authService';
 
-function Login() {
-    const handleFinish = (values) => {
-        console.log(values);
+function Login(props) {
+    const handleFinish = async (values) => {
+        const request = {
+            emailOrUsername: values.username,
+            password: values.password
+        };
+
+        try {
+            // Process login
+            await login(request);
+            props.onLogin();
+        } catch (error) {
+            // Handle login error
+            if (error.response.status === 401) {
+                notification.error({
+                    message: 'Invalid Credentials',
+                    description: 'Please try again!',
+                    placement: 'bottomLeft'
+                });
+            } else {
+                notification.error({
+                    message: 'Error',
+                    description: error.message || 'Something went wrong.',
+                    placement: 'bottomLeft'
+                });
+            }
+        }
     }
 
     useEffect(() => {

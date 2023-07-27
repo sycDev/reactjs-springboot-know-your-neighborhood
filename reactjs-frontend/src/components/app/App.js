@@ -53,12 +53,21 @@ function App() {
 		localStorage.removeItem(ACCESS_TOKEN);
 		setIsAuthenticated(false);
 		setCurrentUser(null);
+		navigate('/login');
 		notification.success({
 			message: 'Success',
 			description: 'You\'re successfully logged out.',
 			placement: 'bottomLeft'
 		});
-		navigate('/login');
+	};
+
+	const handleLogin = () => {
+		navigate('/stores');
+		notification.success({
+			message: 'Success',
+			description: "You're successfully logged in.",
+			placement: 'bottomLeft'
+		});
 	};
 
 	if (isLoading) {
@@ -84,7 +93,10 @@ function App() {
 				onLogout={handleLogout}
 			/>
 			<Content>
-				<AppRouter isAuthenticated={isAuthenticated} />
+				<AppRouter 
+					isAuthenticated={isAuthenticated} 
+					onLogin={handleLogin}
+				/>
 			</Content>
 			<Footer />
 		</Layout>

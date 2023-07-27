@@ -20,7 +20,10 @@ function AppRouter(props) {
             <Route path="/contact" element={<Contact />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route 
+                path="/login" 
+                element={<Login onLogin={props.onLogin} />} 
+            />
             <Route path='/oauth2/redirect' element={<RedirectOAuth />} />
             <Route
                 path="/stores"
