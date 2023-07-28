@@ -30,17 +30,17 @@ There are two roles: USER & ADMIN
 <br/>
 USER can only view stores but ADMIN can edit and delete existing stores.
 <br/>
+Ps: Currently, only DELETE endpoints are denied access for role USER. USER able view, add and edit stores.
+<br/>
 Note: USER can register for an account on the website, while ADMIN accounts are created manually by the system 
 administrator.
-<br/>
-Currently, no role-based authorization, all protected pages and endpoints are open to role USER and ADMIN.
 
 #### User Module
 
-- [ ] Register through registration page
-- [ ] Authentication & Authorization
-  - [ ] Social Login
-    - [ ] Google
+- [x] Register through registration page
+- [x] Authentication & Authorization
+  - [x] Social Login
+    - [x] Google
 
 ##### Extras:
 
@@ -55,8 +55,10 @@ Currently, no role-based authorization, all protected pages and endpoints are op
 
 #### Store Module
 
-- [ ] Add new store
-- [ ] View store details
+- [x] Add new store
+- [x] View store details
+- [x] Edit existing store
+- [x] Delete store
 
 ##### Extras:
 
@@ -75,7 +77,7 @@ Currently, no role-based authorization, all protected pages and endpoints are op
 
 ### Protected
 
-- CRUD for Store
+- Store (CRUD)
 - User Profile
 
 ## Prerequisites
@@ -122,7 +124,7 @@ INSERT INTO db_kyn.`role`(`role_id`, `role_name`) VALUES(1, "USER"), (2, "ADMIN"
 
 Navigate to the `springboot-backend` folder then build and run the Spring Boot application
 
-```
+```bash
 cd springboot-backend
 ./mvnw clean package
 ./mvnw spring-boot:run
@@ -133,7 +135,7 @@ cd springboot-backend
 Launch another terminal and navigate to the `reactjs-frontend` folder
 then install dependencies using npm and start the React development server
 
-```
+```bash
 cd reactjs-frontend
 npm install
 npm start
