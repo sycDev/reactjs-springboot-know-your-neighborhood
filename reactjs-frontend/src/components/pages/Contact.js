@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, Input, Row } from 'antd';
+import { Col, Row } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { 
     FacebookOutlined, 
@@ -11,19 +11,10 @@ import {
     MailOutlined 
 } from '@ant-design/icons';
 import TabTitle from '../common/TabTitle';
+import ContactForm from '../message/ContactForm';
 import './Contact.css';
 
 function Contact() {
-    const handleFinish = (values) => {
-        console.log(values);
-    }
-
-    const preventInputSpacing = (e) => {
-        if (e.key === ' ') {
-            e.preventDefault();
-        }
-    };
-
     return (
         <>
             <TabTitle title="KYN | Contact Us" />
@@ -31,70 +22,7 @@ function Contact() {
                 <Title level={2} className="section-title">Contact Us</Title>
                 <Row>
                     <Col xs={24} lg={12} style={{ padding: '0 50px' }}>
-                        <Form
-                            className="contact-form"
-                            onFinish={handleFinish}
-                        >
-                            <Form.Item
-                                name="name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your name',
-                                    },
-                                ]}
-                                style={{ textAlign: 'left' }}
-                            >
-                                <Input
-                                    placeholder="Name"
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                name="email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your email',
-                                    },
-                                    {
-                                        type: 'email',
-                                        message: 'Invalid email',
-                                    }
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Email"
-                                    onKeyDown={preventInputSpacing}
-                                />
-                            </Form.Item>
-
-                            <Form.Item
-                                name="text"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your message',
-                                    },
-                                ]}
-                            >
-                                <Input.TextArea
-                                    rows={4}
-                                    placeholder="Anything to tell us?"
-                                />
-                            </Form.Item>
-
-                            <Form.Item shouldUpdate>
-                                {() => (
-                                    <Button
-                                        type="primary"
-                                        htmlType="submit"
-                                        style={{ width: '100%' }}
-                                    >
-                                        Send
-                                    </Button>
-                                )}
-                            </Form.Item>
-                        </Form>
+                        <ContactForm />
                     </Col>
                     <Col xs={24} lg={12} style={{ padding: '0 50px' }}>
                         <div>
