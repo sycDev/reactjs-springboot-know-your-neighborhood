@@ -50,6 +50,7 @@ administrator.
   - [ ] Change username
   - [ ] Change password
   - [ ] Upload profile picture
+- [ ] User management for Admin
 
 ---
 
@@ -62,7 +63,11 @@ administrator.
 
 ##### Extras:
 
-- [ ] Images upload for store
+- [ ] Search stores by store name and address
+- [ ] Upload multiple store images
+- [ ] API integration
+  - [ ] Google Map - get stores direction
+  - [ ] Geolocation - get user's current location to suggest nearest stores
 
 ## Pages
 
