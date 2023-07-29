@@ -28,7 +28,6 @@ function App() {
 					}).catch(error => {
 						// Handle token expired
 						if (error.response.status === 401) {
-							navigate("/login");
 							notification.warning({
 								message: 'Session Expired',
 								description: 'Please login again',
