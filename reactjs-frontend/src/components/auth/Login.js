@@ -72,6 +72,7 @@ function Login({ onLogin }) {
                     href={GOOGLE_AUTH_URL}
                     imgSrc={GoogleImg}
                     imgAlt="Google Login"
+                    provider="Google"
                 />
                 <Divider>
                     <small>OR</small>
