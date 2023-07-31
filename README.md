@@ -42,6 +42,9 @@ administrator.
   - [x] Social Login
     - [x] Google
 
+Sequence Diagram of Google Login Process
+![OAuth2 Sequence Diagram (Spring Boot + ReactJS)](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/c211b994-00c7-4a80-bd88-e5740f0172d8)
+
 ##### Extras:
 
 - [ ] Confirmation email upon registration
