@@ -24,6 +24,9 @@ the Registration page or through social login.
 All the requests coming from the reactjs-frontend to secured endpoints in springboot-backend have an access
 token (JWT) that is generated when users logged in.
 
+**High-Level Diagram of the KYN**
+![High Level Diagram](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/a0088207-b3cc-4644-8a39-ecf18a65b8eb)
+
 ## Features
 
 There are two roles: USER & ADMIN
