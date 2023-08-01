@@ -52,7 +52,7 @@ public class StoreRestController {
 	}
 
 	/**
-	 * Search stores by keyword (make, model and regYear)
+	 * Search stores by keyword (Store Name or Address)
 	 * 
 	 * GET /api/stores/search?q={keyword}
 	 */
