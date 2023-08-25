@@ -25,7 +25,8 @@ All the requests coming from the reactjs-frontend to secured endpoints in spring
 token (JWT) that is generated when users logged in.
 
 **High-Level Diagram of the KYN**
-![High Level Diagram](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/a0088207-b3cc-4644-8a39-ecf18a65b8eb)
+
+![High Level Diagram](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/738fa529-2f03-4f04-88d5-2ee7f2da0195)
 
 ## Features
 
@@ -46,7 +47,8 @@ administrator.
     - [x] Google
 
 Sequence Diagram of Google Login Process
-![OAuth2 Sequence Diagram (Spring Boot + ReactJS)](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/c211b994-00c7-4a80-bd88-e5740f0172d8)
+
+![OAuth2 Sequence Diagram](https://github.com/sycDev/reactjs-springboot-know-your-neighborhood/assets/33170649/53f8e0cd-d6f1-4c76-86ab-69cb67bb9958)
 
 ##### Extras:
 
