@@ -18,8 +18,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 1030084516242-hbvajujbpmuq2cojjj2nopqd4len24h3.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${OAUTH2_GOOGLE_CLIENT_ID}
+            client-secret: ${OAUTH2_GOOGLE_CLIENT_SECRET}
             scope:
               - email
               - profile
@@ -30,11 +30,11 @@ spring:
 
 app:
   jwt:
-    secret: eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4OTE3MDA3MSwiaWF0IjoxNjg5MTcwMDcxfQeM0al2
+    secret: ${JWT_SECRET}
     expired_in_ms: 86400000
   oauth2:
       redirectUri: http://localhost:3000/oauth2/redirect
   webhook:
-    slack: https://hooks.slack.com/services/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
+    slack: ${WEBHOOK_SLACK_URL}
   cors:
     allowedOrigins: http://localhost:3000
